@@ -68,7 +68,7 @@ contract MyToken {
         // Subtract from sender
         balanceOf[msg.sender] -= _value;
         // Add to recipient
-        balanceOf[_to] += __value;
+        balanceOf[_to] += _value;
 
         // Emit event AFTER state change
         emit Transfer(msg.sender, _to, _value);
@@ -100,14 +100,14 @@ contract MyToken {
     function transferFrom(address _from, address _to, uint256 _value) public returns (bool success) {
         require(_to != address(0), "Cannot transfer to zero address");
         require(balanceOf[_from] >= _value, "Insufficient balance");
-        require(allowance[_from][msg.sender] >= __value, "Insufficient allowance");
+        require(allowance[_from][msg.sender] >= _value, "Insufficient allowance");
 
         // Update balances
-        balanceOf[_from] -= __value;
-        balanceOf[_to] += __value;
+        balanceOf[_from] -= _value;
+        balanceOf[_to] += _value;
 
         // Decrease allowance
-        allowance[_from][msg.sender] -= __value;
+        allowance[_from][msg.sender] -= _value;
 
         // Emit event AFTER state change
         emit Transfer(_from, _to, _value);
